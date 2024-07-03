@@ -36,10 +36,10 @@ namespace CodePulse.Controllers
                 Categories = new List<Category>()
             };
 
-            foreach(var categoryId in blogPost.Categories)
+            foreach (var categoryId in blogPost.Categories)
             {
                 var category = await _categoryRepository.GetByIdAsync(categoryId);
-                if (category != null) 
+                if (category != null)
                 {
                     blogPostDomain.Categories.Add(category);
                 }
@@ -48,20 +48,20 @@ namespace CodePulse.Controllers
             blogPostDomain = await _blogPostRepository.CreateAsync(blogPostDomain);
 
             //Map Model to DTO
-            var blogPostDto = new BlogPostDto 
-            { 
+            var blogPostDto = new BlogPostDto
+            {
                 Id = blogPostDomain.Id,
                 Title = blogPostDomain.Title,
                 ShortDescription = blogPostDomain.ShortDescription,
                 Author = blogPostDomain.Author,
-                FeaturedImageUrl= blogPostDomain.FeaturedImageUrl,
-                PublishedDate= blogPostDomain.PublishedDate,
+                FeaturedImageUrl = blogPostDomain.FeaturedImageUrl,
+                PublishedDate = blogPostDomain.PublishedDate,
                 Content = blogPostDomain.Content,
                 IsVisible = blogPostDomain.IsVisible,
-                UrlHandle= blogPostDomain.UrlHandle,
+                UrlHandle = blogPostDomain.UrlHandle,
                 Categories = blogPostDomain.Categories.Select(x => new CategoryDto
                 {
-                    Id=x.Id,
+                    Id = x.Id,
                     Name = x.Name,
                     UrlHandle = x.UrlHandle,
                 }).ToList(),
@@ -74,7 +74,7 @@ namespace CodePulse.Controllers
         public async Task<IActionResult> GetBlogPosts()
         {
             var blogPosts = await _blogPostRepository.GetAllAsync();
-            if(blogPosts == null)
+            if (blogPosts == null)
             {
                 return NotFound();
             }
@@ -85,16 +85,16 @@ namespace CodePulse.Controllers
                 {
                     Id = blogPost.Id,
                     Title = blogPost.Title,
-                    ShortDescription= blogPost.ShortDescription,
+                    ShortDescription = blogPost.ShortDescription,
                     Author = blogPost.Author,
                     Content = blogPost.Content,
                     IsVisible = blogPost.IsVisible,
-                    UrlHandle= blogPost.UrlHandle,
+                    UrlHandle = blogPost.UrlHandle,
                     PublishedDate = blogPost.PublishedDate,
                     FeaturedImageUrl = blogPost.FeaturedImageUrl,
                     Categories = blogPost.Categories.Select(x => new CategoryDto
                     {
-                        Id=x.Id,
+                        Id = x.Id,
                         Name = x.Name,
                         UrlHandle = x.UrlHandle,
                     }).ToList()
@@ -107,7 +107,7 @@ namespace CodePulse.Controllers
         public async Task<IActionResult> GetBlogPost([FromRoute] Guid id)
         {
             var blogPost = await _blogPostRepository.GetByIdAsync(id);
-            if(blogPost == null)
+            if (blogPost == null)
             {
                 return NotFound();
             }
@@ -133,7 +133,7 @@ namespace CodePulse.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBlogPost([FromRoute]Guid id,[FromBody]UpdateBlogPostDto updateBlogPost)
+        public async Task<IActionResult> UpdateBlogPost([FromRoute] Guid id, [FromBody] UpdateBlogPostDto updateBlogPost)
         {
             //DTO to domain model
             var blogPost = new BlogPost
@@ -149,8 +149,8 @@ namespace CodePulse.Controllers
                 UrlHandle = updateBlogPost.UrlHandle,
                 Categories = new List<Category>()
             };
-            foreach (var categoryGuid in updateBlogPost.Categories) 
-            { 
+            foreach (var categoryGuid in updateBlogPost.Categories)
+            {
                 var category = await _categoryRepository.GetByIdAsync(categoryGuid);
                 if (category != null)
                 {
@@ -189,7 +189,7 @@ namespace CodePulse.Controllers
         public async Task<IActionResult> DeleteBlogPost([FromRoute] Guid id)
         {
             var blogPost = await _blogPostRepository.DeleteAsync(id);
-            if(blogPost == null)
+            if (blogPost == null)
             {
                 return NotFound();
             }
@@ -204,6 +204,36 @@ namespace CodePulse.Controllers
                 UrlHandle = blogPost.UrlHandle,
                 PublishedDate = blogPost.PublishedDate,
                 FeaturedImageUrl = blogPost.FeaturedImageUrl
+            };
+            return Ok(blogPostDto);
+        }
+
+        [HttpGet]
+        [Route("blog/{url}")]
+        public async Task<IActionResult> GetBlogPostByUrl([FromRoute] string url)
+        {
+            var blogPost = await _blogPostRepository.GetByUrlAsync(url);
+            if (blogPost == null)
+            {
+                return NotFound();
+            }
+            var blogPostDto = new BlogPostDto 
+            {
+                Id = blogPost.Id,
+                Title = blogPost.Title,
+                ShortDescription = blogPost.ShortDescription,
+                Author = blogPost.Author,
+                Content = blogPost.Content,
+                IsVisible = blogPost.IsVisible,
+                UrlHandle = blogPost.UrlHandle,
+                PublishedDate = blogPost.PublishedDate,
+                FeaturedImageUrl = blogPost.FeaturedImageUrl,
+                Categories = blogPost.Categories.Select(x => new CategoryDto
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    UrlHandle = x.UrlHandle,
+                }).ToList()
             };
             return Ok(blogPostDto);
         }

@@ -10,5 +10,6 @@ namespace CodePulse.Repositories
         public Task<BlogPost> GetByIdAsync(Guid id);
         public Task<BlogPost> UpdateAsync(BlogPost blogPost);
         public Task<BlogPost> DeleteAsync(Guid id);
+        public Task<BlogPost> GetByUrlAsync(string url);
     }
 }
