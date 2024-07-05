@@ -1,6 +1,7 @@
 ﻿using CodePulse.Models.Domain;
 using CodePulse.Models.DTOs;
 using CodePulse.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,6 +21,7 @@ namespace CodePulse.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> CreateBlogPost([FromBody] CreateBlogPostDto blogPost)
         {
             //Map DTO to Model
@@ -133,6 +135,7 @@ namespace CodePulse.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> UpdateBlogPost([FromRoute] Guid id, [FromBody] UpdateBlogPostDto updateBlogPost)
         {
             //DTO to domain model
@@ -186,6 +189,7 @@ namespace CodePulse.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Writer")]
         public async Task<IActionResult> DeleteBlogPost([FromRoute] Guid id)
         {
             var blogPost = await _blogPostRepository.DeleteAsync(id);
