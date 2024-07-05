@@ -33,7 +33,7 @@ git clone https://github.com/mihir-pithva/CodePulse-Backend.git
 Add-Migration InitialCreate
 Update-Database
 ```
--Replace InitialCreate with an appropriate migration name.
+- Replace InitialCreate with an appropriate migration name.
 
 ### Build and Run the Project:
 1. Press F5 or click on the Start button in Visual Studio to build and run the project.
@@ -51,18 +51,18 @@ dotnet restore
 dotnet build
 ```
 6. Ensure Database Setup:
-   -Look for a configuration file that typically contains database connection settings. Commonly, this is `appsettings.json` under the project's root directory or in a Config folder.
-   -Modify the ConnectionStrings section to point to your database.
-   -Open a terminal or command prompt.
-   -Navigate to the project directory containing the .csproj file.
-   -Run the following commands:
-   ```bash
-   dotnet ef migrations add InitialCreate
-   dotnet ef database update
-   ```
+       - Look for a configuration file that typically contains database connection settings. Commonly, this is `appsettings.json` under the project's root directory or in a Config folder.
+       - Modify the ConnectionStrings section to point to your database.
+       - Open a terminal or command prompt.
+       - Navigate to the project directory containing the .csproj file.
+       - Run the following commands:
+       ```bash
+       dotnet ef migrations add InitialCreate
+       dotnet ef database update
+       ```
    -Replace InitialCreate with an appropriate migration name.
 8. Run the project:
-   -Use the following commands to build and run:
+   - Use the following commands to build and run:
 ```bash
 dotnet build
 dotnet run
