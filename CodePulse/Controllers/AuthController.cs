@@ -30,16 +30,24 @@ namespace CodePulse.Controllers
             };
 
             //Create User
-            var identityResult = await _userManager.CreateAsync(identityUser,registerUser.Password);
+            var identityResult = await _userManager.CreateAsync(identityUser, registerUser.Password);
 
-            if(identityResult.Succeeded)
+            if (identityResult.Succeeded)
             {
                 //Add role to user
-                identityResult = await _userManager.AddToRoleAsync(identityUser,"Reader");
+                identityResult = await _userManager.AddToRoleAsync(identityUser, "Reader");
 
                 if (identityResult.Succeeded)
                 {
-                    return Ok();
+                    if (identityUser.Email != null)
+                    {
+                        var response = new RegisterResponseDto
+                        {
+                            Email = identityUser.Email,
+                        };
+                        return Ok(response);
+                    }
+
                 }
                 else
                 {
@@ -58,7 +66,7 @@ namespace CodePulse.Controllers
                 {
                     foreach (var error in identityResult.Errors)
                     {
-                        ModelState.AddModelError("",error.Description);
+                        ModelState.AddModelError("", error.Description);
                     }
                 }
             }
@@ -68,13 +76,13 @@ namespace CodePulse.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] LoginUserDto loginUser) 
+        public async Task<IActionResult> Login([FromBody] LoginUserDto loginUser)
         {
             var userFromDb = await _userManager.FindByEmailAsync(loginUser.Email);
             if (userFromDb != null)
             {
                 //check password
-                var isValidPassword = await _userManager.CheckPasswordAsync(userFromDb,loginUser.Password);
+                var isValidPassword = await _userManager.CheckPasswordAsync(userFromDb, loginUser.Password);
                 if (isValidPassword)
                 {
                     var roles = await _userManager.GetRolesAsync(userFromDb);
@@ -91,7 +99,7 @@ namespace CodePulse.Controllers
                     return Ok(response);
                 }
             }
-            ModelState.AddModelError("","Invalid credentials !");
+            ModelState.AddModelError("", "Invalid credentials !");
             return ValidationProblem(ModelState);
         }
     }

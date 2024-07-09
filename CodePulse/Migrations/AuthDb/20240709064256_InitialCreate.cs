@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CodePulse.Migrations.AuthDb
 {
     /// <inheritdoc />
-    public partial class InitialMigrationforAuth : Migration
+    public partial class InitialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -170,7 +170,7 @@ namespace CodePulse.Migrations.AuthDb
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "35440619 - 1436 - 4ed6 - a793 - 0b6d0d99b075", 0, "365d9574-f71a-45bc-9408-3130f2f5e262", "admin@exp.com", false, false, null, "ADMIN@EXP.COM", "ADMIN@EXP.COM", "AQAAAAIAAYagAAAAEFhiNUcJDinD5tgrDWVtbofH5aqxHod68evwQhIFoKiWyV3i1/EGp+pgOPc4m/sQqg==", null, false, "80331dec-889e-424c-be63-ce737015f674", false, "admin@exp.com" });
+                values: new object[] { "35440619 - 1436 - 4ed6 - a793 - 0b6d0d99b075", 0, "be1f6f6c-f1a4-4ee1-bb66-491a19cce590", "admin@exp.com", false, false, null, "ADMIN@EXP.COM", "ADMIN@EXP.COM", "AQAAAAIAAYagAAAAEKF0wqs82EJebEgrBUWm0XE81TaTDAbF76xGaukcX32YUbAb6p8UcLr+wsB3e+gClQ==", null, false, "13397a87-9718-49e1-bb2a-18238b399888", false, "admin@exp.com" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

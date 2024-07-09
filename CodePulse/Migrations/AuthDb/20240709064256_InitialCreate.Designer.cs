@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodePulse.Migrations.AuthDb
 {
     [DbContext(typeof(AuthDbContext))]
-    [Migration("20240704033635_Initial Migration for Auth")]
-    partial class InitialMigrationforAuth
+    [Migration("20240709064256_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -162,15 +162,15 @@ namespace CodePulse.Migrations.AuthDb
                         {
                             Id = "35440619 - 1436 - 4ed6 - a793 - 0b6d0d99b075",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "365d9574-f71a-45bc-9408-3130f2f5e262",
+                            ConcurrencyStamp = "be1f6f6c-f1a4-4ee1-bb66-491a19cce590",
                             Email = "admin@exp.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@EXP.COM",
                             NormalizedUserName = "ADMIN@EXP.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEFhiNUcJDinD5tgrDWVtbofH5aqxHod68evwQhIFoKiWyV3i1/EGp+pgOPc4m/sQqg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKF0wqs82EJebEgrBUWm0XE81TaTDAbF76xGaukcX32YUbAb6p8UcLr+wsB3e+gClQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "80331dec-889e-424c-be63-ce737015f674",
+                            SecurityStamp = "13397a87-9718-49e1-bb2a-18238b399888",
                             TwoFactorEnabled = false,
                             UserName = "admin@exp.com"
                         });
